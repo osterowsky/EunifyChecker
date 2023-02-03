@@ -57,10 +57,10 @@ func main() {
 
 	start := time.Now()
 	urls := []string{
-		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082785512"}
-	//"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082851048",
-	//"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082719976",
-	//"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082654440"}
+		//"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082785512"}
+		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082851048",
+		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082719976",
+		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082654440"}
 
 	var wg sync.WaitGroup
 	for _, url := range urls {
