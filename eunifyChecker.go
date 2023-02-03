@@ -13,21 +13,21 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var env = godotenv.Load(".env")
-var sender, recipient, password = os.Getenv("SENDER"), os.Getenv("RECIPIENT"), os.Getenv("APP_PASSWORD")
+var Env = godotenv.Load(`C:\Users\HP\Desktop\Code\EunifyAlert\.env`)
+var Sender, Recipient, Password = os.Getenv("SENDER"), os.Getenv("RECIPIENT"), os.Getenv("APP_PASSWORD")
 
 func sendEmail(url string) {
-	auth := smtp.PlainAuth("", sender, password, "smtp.gmail.com")
+	auth := smtp.PlainAuth("", Sender, Password, "smtp.gmail.com")
 
 	// Here we do it all: connect to our server, set up a message and send it
 
-	to := []string{recipient}
+	to := []string{Recipient}
 
-	msg := []byte(fmt.Sprintf("To: %s\r\n", recipient) +
+	msg := []byte(fmt.Sprintf("To: %s\r\n", Recipient) +
 		"Subject: EUnify Hoodie, mamy to!?\r\n" +
 		"\r\n" +
 		fmt.Sprintf("URL: %s\r\n", url))
-	err := smtp.SendMail("smtp.gmail.com:587", auth, sender, to, msg)
+	err := smtp.SendMail("smtp.gmail.com:587", auth, Sender, to, msg)
 
 	if err != nil {
 		log.Fatal(err)
@@ -57,10 +57,10 @@ func main() {
 
 	start := time.Now()
 	urls := []string{
-		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082785512",
-		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082851048",
-		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082719976",
-		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082654440"}
+		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082785512"}
+	//"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082851048",
+	//"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082719976",
+	//"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082654440"}
 
 	var wg sync.WaitGroup
 	for _, url := range urls {
