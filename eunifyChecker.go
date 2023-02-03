@@ -7,7 +7,6 @@ import (
 	"net/smtp"
 	"os"
 	"sync"
-	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/joho/godotenv"
@@ -17,6 +16,7 @@ var Env = godotenv.Load(`C:\Users\HP\Desktop\Code\EunifyAlert\.env`)
 var Sender, Recipient, Password = os.Getenv("SENDER"), os.Getenv("RECIPIENT"), os.Getenv("APP_PASSWORD")
 
 func sendEmail(url string) {
+
 	auth := smtp.PlainAuth("", Sender, Password, "smtp.gmail.com")
 
 	// Here we do it all: connect to our server, set up a message and send it
@@ -55,9 +55,8 @@ func available(url string) (bool, error) {
 
 func main() {
 
-	start := time.Now()
 	urls := []string{
-		//"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082785512"}
+		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082785512",
 		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082851048",
 		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082719976",
 		"https://www.koeniggalerie.com/products/eunify-hoodie?variant=43630082654440"}
@@ -75,7 +74,6 @@ func main() {
 			if isAvailable {
 				sendEmail(url)
 			}
-			fmt.Println(time.Since(start).Seconds())
 		}(url)
 	}
 	wg.Wait()
